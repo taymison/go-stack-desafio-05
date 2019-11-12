@@ -4,14 +4,6 @@ export const Form = styled.form`
   margin-top: 30px;
   display: flex;
   flex-direction: row;
-
-  input {
-    flex: 1;
-    border: 1px solid #eee;
-    padding: 10px 15px;
-    border-radius: 4px;
-    font-size: 16px;
-  }
 `;
 
 const rotate = keyframes`
@@ -22,6 +14,26 @@ const rotate = keyframes`
   to {
     transform: rotate(360deg);
   }
+`;
+
+export const Input = styled.input.attrs(props => ({
+  type: 'text',
+  placeholder: 'Adicionar repositório',
+  value: props.value,
+  onChange: props.onChange,
+  hasError: props.hasError,
+}))`
+  flex: 1;
+  border: 1px solid #eee;
+  padding: 10px 15px;
+  border-radius: 4px;
+  font-size: 16px;
+
+  ${props =>
+    props.hasError &&
+    css`
+      border-color: red;
+    `}
 `;
 
 export const SubmitButton = styled.button.attrs(props => ({
