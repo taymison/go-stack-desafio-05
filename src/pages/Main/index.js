@@ -35,7 +35,7 @@ export default class Main extends Component {
   }
 
   handleInputChange = e => {
-    this.setState({ newRepo: e.target.value });
+    this.setState({ newRepo: e.target.value, hasError: false });
   };
 
   handleSubmit = async e => {
@@ -45,6 +45,10 @@ export default class Main extends Component {
       this.setState({ loading: true });
 
       const { newRepo, repositories } = this.state;
+
+      if (repositories.find(repository => repository.name === newRepo)) {
+        throw new Error('Repositório duplicado');
+      }
 
       const response = await api.get(`/repos/${newRepo}`);
 
